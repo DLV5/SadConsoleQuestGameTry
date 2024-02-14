@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using SadConsole.Instructions;
+using System.Diagnostics;
 
 namespace ConsoleStyleFantasy
 {

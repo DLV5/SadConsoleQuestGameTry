@@ -1,4 +1,5 @@
-﻿using SadConsole.UI;
+﻿using SadConsole.Instructions;
+using SadConsole.UI;
 
 namespace ConsoleStyleFantasy
 {
@@ -6,10 +7,13 @@ namespace ConsoleStyleFantasy
     {
         public ScreenSurface HealthScreen;
         public ScreenSurface GoldScreen;
+        public ScreenSurface TimeScreen;
 
         private PlayerStats _playerStats;
-        private SadConsole.Instructions.DrawString _healthUI;
-        private SadConsole.Instructions.DrawString _goldUI;
+
+        private DrawString _healthUI;
+        private DrawString _goldUI;
+        private DrawString _timeUI;
 
         public PlayerUI(PlayerStats playerStats) : base(28, 4)
         {
@@ -27,46 +31,71 @@ namespace ConsoleStyleFantasy
                 UseKeyboard = false
             };
 
-            _healthUI = new SadConsole.Instructions.DrawString(
+            TimeScreen = new ScreenSurface(GameSettings.GAME_WIDTH - 20, GameSettings.GAME_HEIGHT - this.Height - 30)
+            {
+                Position = (55, this.Height + 3),
+                UseKeyboard = false
+            };
+
+            _healthUI = new DrawString(
                 (SadConsole.ColoredString
                 .Parser
                 .Parse($"Current health: [c:r f:green]{_playerStats.Health.CurrentHealth}/{_playerStats.Health.MaxHealth}" ))
             );
 
             HealthScreen.SadComponents.Add(_healthUI);
-            PlayerHealth.OnHealthChanged += UpdateHealthText;
+            PlayerHealth.OnHealthChanged += OnHealthChanged;
 
-            _goldUI = new SadConsole.Instructions.DrawString(
+            _goldUI = new DrawString(
                 (SadConsole.ColoredString
                 .Parser
                 .Parse($"Gold: [c:r f:yellow]{_playerStats.Gold.CurrentGoldAmount}" ))
             );
 
             GoldScreen.SadComponents.Add(_goldUI);
-            PlayerGold.OnGoldChanged += UpdateGoldText;
-        }
+            PlayerGold.OnGoldChanged += OnGoldChanged;
 
-        public void UpdateHealthText()
-        {
-            _healthUI.Text = SadConsole.ColoredString
+            _timeUI = new DrawString(
+                (SadConsole.ColoredString
                 .Parser
-                .Parse($"Current health: [c:r f:green]{_playerStats.Health.CurrentHealth}/{_playerStats.Health.MaxHealth}    ");
+                .Parse($"{GameTime.CurrentHour}:00"))
+            );
 
-            _healthUI.TotalTimeToPrint = TimeSpan.Zero;
-
-            _healthUI.Repeat();
+            TimeScreen.SadComponents.Add(_timeUI);
+            GameTime.OnTimeChanged += OnGameTimeChanged;
         }
 
-        public void UpdateGoldText()
+        public void UpdateText(DrawString instruction, string textToUpdate)
         {
-            _goldUI.Text = SadConsole.ColoredString
-                .Parser
-                .Parse($"Gold: [c:r f:yellow]{_playerStats.Gold.CurrentGoldAmount}");
+            instruction.Text = ColoredString.Parser.Parse(textToUpdate);
 
-            _goldUI.TotalTimeToPrint = TimeSpan.Zero;
+            instruction.TotalTimeToPrint = TimeSpan.Zero;
 
-            _goldUI.Repeat();
+            instruction.Repeat();
         }
 
+        private void OnHealthChanged()
+        {
+            UpdateText(
+                _healthUI,
+                $"Current health: [c:r f:green]{_playerStats.Health.CurrentHealth}/{_playerStats.Health.MaxHealth}    "
+                );
+        }
+
+        private void OnGoldChanged()
+        {
+            UpdateText(
+                _goldUI,
+                $"Gold: [c:r f:yellow]{_playerStats.Gold.CurrentGoldAmount}"
+                );
+        }  
+
+        private void OnGameTimeChanged()
+        {
+            UpdateText(
+                _timeUI,
+                $"{GameTime.CurrentHour}:00"
+                );
+        }
     }
 }

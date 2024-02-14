@@ -16,6 +16,8 @@
             Children.Add(_playerStats.UI.HealthScreen);
 
             Children.Add(_playerStats.UI.GoldScreen);
+
+            Children.Add(_playerStats.UI.TimeScreen);
         }
 
         public override void OnFocused()

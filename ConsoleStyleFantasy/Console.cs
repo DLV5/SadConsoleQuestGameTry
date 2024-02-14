@@ -1,5 +1,6 @@
 ﻿using SadConsole.Components;
 using SadConsole.UI;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ConsoleStyleFantasy
 {
@@ -10,6 +11,8 @@ namespace ConsoleStyleFantasy
         private readonly ClassicConsoleKeyboardHandler _keyboardHandlerDOS;
 
         private PlayerStats _playerStats;
+
+        private SadConsole.Instructions.DrawString _typingInstruction;
 
         public Console(PlayerStats playerStats) : base(28, 4)
         {
@@ -40,10 +43,26 @@ namespace ConsoleStyleFantasy
         private void SetupHandlers()
         {
             _keyboardHandlerDOS.EnterPressedAction = DOSHandlerEnterPressed;
-
             Cursor cursor = PromptScreen.GetSadComponent<Cursor>()!;
 
-            cursor.Print("You are the slave in a deep mine, all what you can do now is to mine gold").NewLine().NewLine();
+            cursor.UseStringParser = true;
+
+            string[] text = new string[] {
+                "  ",
+                "You are the slave in a deep mine, all what you can do now is to [c:r f:yellow]mine[c:undo] gold"
+            };
+
+            _typingInstruction = new SadConsole.Instructions
+    .DrawString(SadConsole.ColoredString.Parser.Parse(string.Join("\r\n", text)));
+
+            _typingInstruction.Position = cursor.Position;
+            _typingInstruction.TotalTimeToPrint = TimeSpan.FromMilliseconds(500);
+
+            PromptScreen.SadComponents.Add(_typingInstruction);
+
+            cursor.Position = new(_typingInstruction.Position.X, _typingInstruction.Position.Y + text.Length);
+
+            //cursor.Print("You are the slave in a deep mine, all what you can do now is to [c:r f:yellow]mine[c:undo] gold").NewLine().NewLine();
             PromptScreen.Surface.TimesShiftedUp = 0;
         }
 
@@ -51,18 +70,39 @@ namespace ConsoleStyleFantasy
         {
             value = value.ToLower().Trim();
 
+            string[] text = new string[] { };
+
             if (value == "mine")
             {
-                cursor.NewLine().
-                              Print("  You are mining succesfully").NewLine().
-                              Print("  +1 Gold").NewLine();
+                text = new string[]
+                {
+                    "  ",
+                    "  You are mining succesfully",
+                    "  +1 Gold"
+                };
+
                 _playerStats.Gold.AddGold(1);
             }
             else
             {
-                cursor.Print("  The warder whips you cause you aren't mining the gold").NewLine();
+                text = new string[]
+               {
+                    "  ",
+                    "  The warder whips you cause you aren't mining the gold"
+               };
+
                 _playerStats.Health.DecreaseHealth(1);
             }
+
+            _typingInstruction.Text = SadConsole.ColoredString.Parser.Parse(string.Join("\r\n", text));
+
+            _typingInstruction.Position = cursor.Position;
+
+            _typingInstruction.Repeat();
+
+            cursor.Position = new (_typingInstruction.Position.X, _typingInstruction.Position.Y + text.Length);
+
+            GameTime.CurrentHour++;
         }
     }
 }
