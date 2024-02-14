@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dmitrii.Ivanov\\source\\repos\\SadConsoleQuestGameTry\\ConsoleStyleFantasy\\MyGame.csproj": {}
+    "D:\\source\\repos\\SadConsoleQuestGameTry\\ConsoleStyleFantasy\\MyGame.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dmitrii.Ivanov\\source\\repos\\SadConsoleQuestGameTry\\ConsoleStyleFantasy\\MyGame.csproj": {
+    "D:\\source\\repos\\SadConsoleQuestGameTry\\ConsoleStyleFantasy\\MyGame.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dmitrii.Ivanov\\source\\repos\\SadConsoleQuestGameTry\\ConsoleStyleFantasy\\MyGame.csproj",
+        "projectUniqueName": "D:\\source\\repos\\SadConsoleQuestGameTry\\ConsoleStyleFantasy\\MyGame.csproj",
         "projectName": "MyGame",
-        "projectPath": "C:\\Users\\Dmitrii.Ivanov\\source\\repos\\SadConsoleQuestGameTry\\ConsoleStyleFantasy\\MyGame.csproj",
-        "packagesPath": "C:\\Users\\Dmitrii.Ivanov\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dmitrii.Ivanov\\source\\repos\\SadConsoleQuestGameTry\\ConsoleStyleFantasy\\obj\\",
+        "projectPath": "D:\\source\\repos\\SadConsoleQuestGameTry\\ConsoleStyleFantasy\\MyGame.csproj",
+        "packagesPath": "C:\\Users\\diman\\.nuget\\packages\\",
+        "outputPath": "D:\\source\\repos\\SadConsoleQuestGameTry\\ConsoleStyleFantasy\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Dmitrii.Ivanov\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\diman\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -69,7 +67,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

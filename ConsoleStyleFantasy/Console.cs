@@ -1,4 +1,5 @@
 ﻿using SadConsole.Components;
+using SadConsole.Instructions;
 using SadConsole.UI;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -8,7 +9,7 @@ namespace ConsoleStyleFantasy
     {
         public ScreenSurface PromptScreen { get; private set; }
 
-        private readonly ClassicConsoleKeyboardHandler _keyboardHandlerDOS;
+        private readonly ClassicConsoleDrawStringKeyboardHandler _keyboardHandlerDOS;
 
         private PlayerStats _playerStats;
 
@@ -18,7 +19,7 @@ namespace ConsoleStyleFantasy
         {
             _playerStats = playerStats;
 
-            _keyboardHandlerDOS = new ClassicConsoleKeyboardHandler("Type your action> ");
+            _keyboardHandlerDOS = new ClassicConsoleDrawStringKeyboardHandler("Type your action> ");
 
             PromptScreen = new ScreenSurface(GameSettings.GAME_WIDTH - 20, GameSettings.GAME_HEIGHT - this.Height - 20)
             {
@@ -51,25 +52,24 @@ namespace ConsoleStyleFantasy
                 "  ",
                 "You are the slave in a deep mine, all what you can do now is to [c:r f:yellow]mine[c:undo] gold"
             };
-
-            _typingInstruction = new SadConsole.Instructions
-    .DrawString(SadConsole.ColoredString.Parser.Parse(string.Join("\r\n", text)));
+            _typingInstruction = new DrawString(ColoredString.Parser.Parse(string.Join("\r\n", text)));
 
             _typingInstruction.Position = cursor.Position;
             _typingInstruction.TotalTimeToPrint = TimeSpan.FromMilliseconds(500);
 
-            _typingInstruction.Repeating += OnWritingStarted;
-            _typingInstruction.Finished += OnWritingFinished;
+            _typingInstruction.Finished += _typingInstruction_Finished;
+            _typingInstruction.RemoveOnFinished = true;
+
+            _keyboardHandlerDOS.IsReady = false;
 
             PromptScreen.SadComponents.Add(_typingInstruction);
 
             cursor.Position = new(_typingInstruction.Position.X, _typingInstruction.Position.Y + text.Length);
 
-            //cursor.Print("You are the slave in a deep mine, all what you can do now is to [c:r f:yellow]mine[c:undo] gold").NewLine().NewLine();
             PromptScreen.Surface.TimesShiftedUp = 0;
         }
 
-        private void DOSHandlerEnterPressed(ClassicConsoleKeyboardHandler keyboardComponent, Cursor cursor, string value)
+        private void DOSHandlerEnterPressed(ClassicConsoleDrawStringKeyboardHandler keyboardComponent, Cursor cursor, string value)
         {
             value = value.ToLower().Trim();
 
@@ -90,33 +90,33 @@ namespace ConsoleStyleFantasy
             {
                 text = new string[]
                {
-                    $" {_keyboardHandlerDOS.EraseGlyph} ",
+                    $" ",
                     "  The warder whips you cause you aren't mining the gold"
                };
 
                 _playerStats.Health.DecreaseHealth(1);
             }
 
-            _typingInstruction.Text = SadConsole.ColoredString.Parser.Parse(string.Join("\r\n", text));
-
+            _typingInstruction.Text = ColoredString.Parser.Parse(string.Join("\r\n", text));
             _typingInstruction.Position = cursor.Position;
 
-            
-            cursor.Position = new (_typingInstruction.Position.X, _typingInstruction.Position.Y + text.Length);
+            cursor.Position = new(_typingInstruction.Position.X, _typingInstruction.Position.Y + text.Length);
 
             _typingInstruction.Repeat();
+            _typingInstruction.Position = cursor.Position;
+            _typingInstruction.Cursor = cursor;
+            _typingInstruction.TotalTimeToPrint = TimeSpan.FromMilliseconds(500);
+            _typingInstruction.Finished += _typingInstruction_Finished;
+            _typingInstruction.RemoveOnFinished = true;
+
+            keyboardComponent.IsReady = false;
+
+            PromptScreen.SadComponents.Add(_typingInstruction);
 
             GameTime.CurrentHour++;
         }
 
-        private void OnWritingStarted(object? sender, EventArgs e)
-        {
-            PromptScreen.IsFocused = false;
-        }
-        
-        private void OnWritingFinished(object? sender, EventArgs e)
-        {
-            PromptScreen.IsFocused = true;
-        }
+        private void _typingInstruction_Finished(object? sender, EventArgs e) =>
+            _keyboardHandlerDOS.IsReady = true;
     }
 }

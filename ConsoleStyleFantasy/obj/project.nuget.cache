@@ -1,18 +1,18 @@
 {
   "version": 2,
-  "dgSpecHash": "hMFgkwhr0e1YOfqZyO1JxIECsTiwuwdfTqis6IVJYbjEWifbOHbQEglqr9S3mcZbj0L742BhOZMjWSVrEJPi5w==",
+  "dgSpecHash": "8JAKia+XQcCT2EylxKSIYQd8grQ7HCzlF0a0y7SbvCQLljBf2Pg6EZ+PuTPGKhaKECB0JRAz3O4zYI/AWvyZuA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Dmitrii.Ivanov\\source\\repos\\SadConsoleQuestGameTry\\ConsoleStyleFantasy\\MyGame.csproj",
+  "projectFilePath": "D:\\source\\repos\\SadConsoleQuestGameTry\\ConsoleStyleFantasy\\MyGame.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Dmitrii.Ivanov\\.nuget\\packages\\colorminestandard\\1.0.0\\colorminestandard.1.0.0.nupkg.sha512",
-    "C:\\Users\\Dmitrii.Ivanov\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.1.303\\monogame.framework.desktopgl.3.8.1.303.nupkg.sha512",
-    "C:\\Users\\Dmitrii.Ivanov\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
-    "C:\\Users\\Dmitrii.Ivanov\\.nuget\\packages\\sadconsole\\10.0.2\\sadconsole.10.0.2.nupkg.sha512",
-    "C:\\Users\\Dmitrii.Ivanov\\.nuget\\packages\\sadconsole.extended\\10.0.2\\sadconsole.extended.10.0.2.nupkg.sha512",
-    "C:\\Users\\Dmitrii.Ivanov\\.nuget\\packages\\sadconsole.host.monogame\\10.0.0\\sadconsole.host.monogame.10.0.0.nupkg.sha512",
-    "C:\\Users\\Dmitrii.Ivanov\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
-    "C:\\Users\\Dmitrii.Ivanov\\.nuget\\packages\\system.text.encoding.codepages\\6.0.0\\system.text.encoding.codepages.6.0.0.nupkg.sha512",
-    "C:\\Users\\Dmitrii.Ivanov\\.nuget\\packages\\thesadrogue.primitives\\1.6.0-rc3\\thesadrogue.primitives.1.6.0-rc3.nupkg.sha512"
+    "C:\\Users\\diman\\.nuget\\packages\\colorminestandard\\1.0.0\\colorminestandard.1.0.0.nupkg.sha512",
+    "C:\\Users\\diman\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.1.303\\monogame.framework.desktopgl.3.8.1.303.nupkg.sha512",
+    "C:\\Users\\diman\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\diman\\.nuget\\packages\\sadconsole\\10.0.2\\sadconsole.10.0.2.nupkg.sha512",
+    "C:\\Users\\diman\\.nuget\\packages\\sadconsole.extended\\10.0.2\\sadconsole.extended.10.0.2.nupkg.sha512",
+    "C:\\Users\\diman\\.nuget\\packages\\sadconsole.host.monogame\\10.0.0\\sadconsole.host.monogame.10.0.0.nupkg.sha512",
+    "C:\\Users\\diman\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\diman\\.nuget\\packages\\system.text.encoding.codepages\\6.0.0\\system.text.encoding.codepages.6.0.0.nupkg.sha512",
+    "C:\\Users\\diman\\.nuget\\packages\\thesadrogue.primitives\\1.6.0-rc3\\thesadrogue.primitives.1.6.0-rc3.nupkg.sha512"
   ],
   "logs": []
 }
