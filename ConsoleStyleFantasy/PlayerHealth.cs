@@ -15,6 +15,7 @@ namespace ConsoleStyleFantasy
             private set
             {
                 _currentHealth = Math.Min(value, MaxHealth);
+                _currentHealth = Math.Max(value, 0);
                 OnHealthChanged?.Invoke();
 
                 if (CurrentHealth <= 0) {

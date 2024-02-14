@@ -58,6 +58,9 @@ namespace ConsoleStyleFantasy
             _typingInstruction.Position = cursor.Position;
             _typingInstruction.TotalTimeToPrint = TimeSpan.FromMilliseconds(500);
 
+            _typingInstruction.Repeating += OnWritingStarted;
+            _typingInstruction.Finished += OnWritingFinished;
+
             PromptScreen.SadComponents.Add(_typingInstruction);
 
             cursor.Position = new(_typingInstruction.Position.X, _typingInstruction.Position.Y + text.Length);
@@ -87,7 +90,7 @@ namespace ConsoleStyleFantasy
             {
                 text = new string[]
                {
-                    "  ",
+                    $" {_keyboardHandlerDOS.EraseGlyph} ",
                     "  The warder whips you cause you aren't mining the gold"
                };
 
@@ -98,11 +101,22 @@ namespace ConsoleStyleFantasy
 
             _typingInstruction.Position = cursor.Position;
 
-            _typingInstruction.Repeat();
-
+            
             cursor.Position = new (_typingInstruction.Position.X, _typingInstruction.Position.Y + text.Length);
 
+            _typingInstruction.Repeat();
+
             GameTime.CurrentHour++;
+        }
+
+        private void OnWritingStarted(object? sender, EventArgs e)
+        {
+            PromptScreen.IsFocused = false;
+        }
+        
+        private void OnWritingFinished(object? sender, EventArgs e)
+        {
+            PromptScreen.IsFocused = true;
         }
     }
 }
