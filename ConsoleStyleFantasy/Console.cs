@@ -1,4 +1,5 @@
-﻿using SadConsole.Components;
+﻿using Newtonsoft.Json.Linq;
+using SadConsole.Components;
 using SadConsole.Instructions;
 using SadConsole.UI;
 using static System.Net.Mime.MediaTypeNames;
@@ -13,7 +14,10 @@ namespace ConsoleStyleFantasy
 
         private PlayerStats _playerStats;
 
-        private SadConsole.Instructions.DrawString _typingInstruction;
+        private DrawString _typingInstruction;
+
+        private DialogBranch _dialogBranch;
+        private DialogBranch _currentBranch;
 
         public Console(PlayerStats playerStats) : base(28, 4)
         {
@@ -34,6 +38,54 @@ namespace ConsoleStyleFantasy
             SetupHandlers();
 
             PromptScreen.SadComponents.Add(_keyboardHandlerDOS);
+
+
+            DialogEndPoint _dialogGoldLeaf = new DialogEndPoint(
+                    new string[]
+                    {
+                        " ",
+                        "  You are mining succesfully",
+                        "  +100 Gold",
+                        "  You giving almost all gold to warden but ably to save a small piece in your pocket",
+                        "  -99 gold",
+                        " "
+                    },
+                    () =>
+                    {
+                        _playerStats.Gold.AddGold(1);
+                    }
+                );
+            
+            DialogEndPoint _dialogAnotherLeaf = new DialogEndPoint(
+                    new string[]
+                    {
+                        " ",
+                        "  The warder whips you cause you aren't mining the gold",
+                        " "
+                    },
+                    () =>
+                    {
+                        _playerStats.Health.DecreaseHealth(1);
+                    }
+                );
+
+            _dialogBranch = new DialogBranch(
+                    new string[] {
+                "You are the slave in a deep mine, all what you can do now is to [c:r f:yellow]mine[c:undo] gold" },
+                    (string prompt) =>
+                    {
+                        if (prompt == "mine")
+                        {
+                            return _dialogGoldLeaf;
+                        }
+                        else
+                        {
+                            return _dialogAnotherLeaf;
+                        }
+                    }
+                );
+
+            _currentBranch = _dialogBranch;
         }
 
         public override void OnFocused()
@@ -48,9 +100,8 @@ namespace ConsoleStyleFantasy
 
             cursor.UseStringParser = true;
 
-            string[] text = new string[] {
-                "You are the slave in a deep mine, all what you can do now is to [c:r f:yellow]mine[c:undo] gold"
-            };
+            string[] text = _dialogBranch.GetDialog();
+
             _typingInstruction = new DrawString(ColoredString.Parser.Parse(string.Join("\r\n", text)));
 
             _typingInstruction.Position = cursor.Position;
@@ -72,33 +123,7 @@ namespace ConsoleStyleFantasy
         {
             value = value.ToLower().Trim();
 
-            string[] text = new string[] { };
-
-            if (value == "mine")
-            {
-                text = new string[]
-                {
-                    " ",
-                    "  You are mining succesfully",
-                    "  +100 Gold",
-                    "  You giving almost all gold to warden but ably to save a small piece in your pocket",
-                    "  -99 gold",
-                    " "
-                };
-
-                _playerStats.Gold.AddGold(1);
-            }
-            else
-            {
-                text = new string[]
-               {
-                    " ",
-                    "  The warder whips you cause you aren't mining the gold",
-                    " "
-               };
-
-                _playerStats.Health.DecreaseHealth(1);
-            }
+            string[] text = ProceedPrompt(value);
 
             _typingInstruction.Text = ColoredString.Parser.Parse(string.Join("\r\n", text));
             _typingInstruction.Position = cursor.Position;
@@ -121,5 +146,17 @@ namespace ConsoleStyleFantasy
 
         private void _typingInstruction_Finished(object? sender, EventArgs e) =>
             _keyboardHandlerDOS.IsReady = true;
+
+        /// <summary>
+        /// Handles player input
+        /// </summary>
+        /// <param name="prompt"></param>
+        /// <returns></returns>
+        private string[] ProceedPrompt(string prompt)
+        {
+            DialogComponent _nextBranch = _currentBranch.GetNextDialog(prompt);
+            _currentBranch = (DialogBranch)_nextBranch;
+            return _nextBranch.GetDialog();
+        }
     }
 }
