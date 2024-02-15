@@ -6,18 +6,18 @@
 
         public static event Action? OnTimeChanged;
 
-        private static float _currentHour = 8;
-        public static float CurrentHour {
-            get => _currentHour;
+        private static TimeOnly _currentTime = new TimeOnly(8,0);
+        public static TimeOnly CurrentTime {
+            get => _currentTime;
             set
             {
-                if(value > 24)
+                if(value >= TimeOnly.MaxValue)
                 {
-                    _currentHour = 0;
+                    _currentTime = TimeOnly.MinValue;
                     OnDayEnded?.Invoke();
                 } else
                 {
-                    _currentHour = value;
+                    _currentTime = value;
                 }
 
                 OnTimeChanged?.Invoke();

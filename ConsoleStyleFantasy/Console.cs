@@ -80,9 +80,9 @@ namespace ConsoleStyleFantasy
                 {
                     " ",
                     "  You are mining succesfully",
-                    "  +1 Gold",
-                    "  +1 Gold",
-                    "  +1 Gold",
+                    "  +100 Gold",
+                    "  You giving almost all gold to warden but ably to save a small piece in your pocket",
+                    "  -99 gold",
                     " "
                 };
 
@@ -108,7 +108,7 @@ namespace ConsoleStyleFantasy
             _typingInstruction.Repeat();
             _typingInstruction.Position = cursor.Position;
             _typingInstruction.Cursor = cursor;
-            _typingInstruction.TotalTimeToPrint = TimeSpan.FromMilliseconds(500);
+            _typingInstruction.TotalTimeToPrint = TimeSpan.FromMilliseconds(1000);
             _typingInstruction.Finished += _typingInstruction_Finished;
             _typingInstruction.RemoveOnFinished = true;
 
@@ -116,7 +116,7 @@ namespace ConsoleStyleFantasy
 
             PromptScreen.SadComponents.Add(_typingInstruction);
 
-            GameTime.CurrentHour++;
+            GameTime.CurrentTime = GameTime.CurrentTime.AddMinutes(60);
         }
 
         private void _typingInstruction_Finished(object? sender, EventArgs e) =>

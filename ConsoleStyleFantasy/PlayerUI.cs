@@ -58,7 +58,7 @@ namespace ConsoleStyleFantasy
             _timeUI = new DrawString(
                 (SadConsole.ColoredString
                 .Parser
-                .Parse($"{GameTime.CurrentHour}:00"))
+                .Parse($"{GameTime.CurrentTime}:00"))
             );
 
             TimeScreen.SadComponents.Add(_timeUI);
@@ -94,7 +94,7 @@ namespace ConsoleStyleFantasy
         {
             UpdateText(
                 _timeUI,
-                $"{GameTime.CurrentHour}:00"
+                $"{GameTime.CurrentTime}    "
                 );
         }
     }
