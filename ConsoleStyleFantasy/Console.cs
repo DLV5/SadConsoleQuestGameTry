@@ -49,7 +49,6 @@ namespace ConsoleStyleFantasy
             cursor.UseStringParser = true;
 
             string[] text = new string[] {
-                "  ",
                 "You are the slave in a deep mine, all what you can do now is to [c:r f:yellow]mine[c:undo] gold"
             };
             _typingInstruction = new DrawString(ColoredString.Parser.Parse(string.Join("\r\n", text)));
@@ -79,9 +78,12 @@ namespace ConsoleStyleFantasy
             {
                 text = new string[]
                 {
-                    "  ",
+                    " ",
                     "  You are mining succesfully",
-                    "  +1 Gold"
+                    "  +1 Gold",
+                    "  +1 Gold",
+                    "  +1 Gold",
+                    " "
                 };
 
                 _playerStats.Gold.AddGold(1);
@@ -90,8 +92,9 @@ namespace ConsoleStyleFantasy
             {
                 text = new string[]
                {
-                    $" ",
-                    "  The warder whips you cause you aren't mining the gold"
+                    " ",
+                    "  The warder whips you cause you aren't mining the gold",
+                    " "
                };
 
                 _playerStats.Health.DecreaseHealth(1);
@@ -100,7 +103,7 @@ namespace ConsoleStyleFantasy
             _typingInstruction.Text = ColoredString.Parser.Parse(string.Join("\r\n", text));
             _typingInstruction.Position = cursor.Position;
 
-            cursor.Position = new(_typingInstruction.Position.X, _typingInstruction.Position.Y + text.Length);
+            cursor.Position = new(_typingInstruction.Position.X, _typingInstruction.Position.Y);
 
             _typingInstruction.Repeat();
             _typingInstruction.Position = cursor.Position;

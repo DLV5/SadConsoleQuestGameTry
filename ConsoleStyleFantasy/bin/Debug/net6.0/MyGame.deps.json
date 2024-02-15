@@ -9,6 +9,7 @@
       "MyGame/1.0.0": {
         "dependencies": {
           "MonoGame.Framework.DesktopGL": "3.8.1.303",
+          "SadConsole": "10.0.2",
           "SadConsole.Extended": "10.0.2",
           "SadConsole.Host.MonoGame": "10.0.0"
         },

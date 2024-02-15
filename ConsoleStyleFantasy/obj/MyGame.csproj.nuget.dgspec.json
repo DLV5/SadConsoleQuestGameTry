@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "D:\\source\\repos\\SadConsoleQuestGameTry\\ConsoleStyleFantasy\\MyGame.csproj": {}
+    "C:\\Users\\Dmitrii.Ivanov\\source\\repos\\SadConsoleQuestGameTry\\ConsoleStyleFantasy\\MyGame.csproj": {}
   },
   "projects": {
-    "D:\\source\\repos\\SadConsoleQuestGameTry\\ConsoleStyleFantasy\\MyGame.csproj": {
+    "C:\\Users\\Dmitrii.Ivanov\\source\\repos\\SadConsoleQuestGameTry\\ConsoleStyleFantasy\\MyGame.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\source\\repos\\SadConsoleQuestGameTry\\ConsoleStyleFantasy\\MyGame.csproj",
+        "projectUniqueName": "C:\\Users\\Dmitrii.Ivanov\\source\\repos\\SadConsoleQuestGameTry\\ConsoleStyleFantasy\\MyGame.csproj",
         "projectName": "MyGame",
-        "projectPath": "D:\\source\\repos\\SadConsoleQuestGameTry\\ConsoleStyleFantasy\\MyGame.csproj",
-        "packagesPath": "C:\\Users\\diman\\.nuget\\packages\\",
-        "outputPath": "D:\\source\\repos\\SadConsoleQuestGameTry\\ConsoleStyleFantasy\\obj\\",
+        "projectPath": "C:\\Users\\Dmitrii.Ivanov\\source\\repos\\SadConsoleQuestGameTry\\ConsoleStyleFantasy\\MyGame.csproj",
+        "packagesPath": "C:\\Users\\Dmitrii.Ivanov\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Dmitrii.Ivanov\\source\\repos\\SadConsoleQuestGameTry\\ConsoleStyleFantasy\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\diman\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Dmitrii.Ivanov\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -41,6 +43,10 @@
             "MonoGame.Framework.DesktopGL": {
               "target": "Package",
               "version": "[3.8.1.303, )"
+            },
+            "SadConsole": {
+              "target": "Package",
+              "version": "[10.0.2, )"
             },
             "SadConsole.Extended": {
               "target": "Package",
@@ -67,7 +73,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }

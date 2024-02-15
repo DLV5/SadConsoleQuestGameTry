@@ -96,8 +96,6 @@ namespace SadConsole.Components
             _attachedCursor.IsVisible = true;
             _attachedCursor.DisableWordBreak = true;
             _attachedCursor.UseStringParser = false;
-            _attachedCursor.CarriageReturn();
-            PrintPrompt();
         }
 
         /// <summary>
